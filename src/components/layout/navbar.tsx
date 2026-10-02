@@ -13,6 +13,7 @@ export default function Navbar() {
     { name: "Profil Desa", href: "/profil" },
     { name: "Pemerintahan", href: "/pemerintahan" },
     { name: "Berita", href: "/berita" },
+    { name: "Dokumen", href: "/dokumen" },
   ];
 
   return (

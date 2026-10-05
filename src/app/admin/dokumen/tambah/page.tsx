@@ -1,6 +1,3 @@
-// Path: src/app/admin/dokumen/tambah/page.tsx
-// Dibuat baru
-
 "use client";
 
 import { useState } from "react";

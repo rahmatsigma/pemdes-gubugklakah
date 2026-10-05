@@ -7,11 +7,11 @@ import { Menu, X } from "lucide-react";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
-  // Menu Transparansi sudah dihapus dari daftar ini
   const navLinks = [
     { name: "Beranda", href: "/" },
     { name: "Profil Desa", href: "/profil" },
     { name: "Pemerintahan", href: "/pemerintahan" },
+    { name: "Layanan", href: "/layanan" },
     { name: "Berita", href: "/berita" },
     { name: "Dokumen", href: "/dokumen" },
   ];

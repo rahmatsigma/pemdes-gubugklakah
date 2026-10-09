@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { LayoutDashboard, Newspaper, Users, LogOut, Menu, X, Settings, FileText } from "lucide-react"; // Tambah FileText
+import { LayoutDashboard, Newspaper, Users, LogOut, Menu, X, Settings, FileText, Mail } from "lucide-react"; // Tambah Mail
 import { createClient } from "../../utils/supabase/client";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -19,9 +19,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   const menuItems = [
     { name: "Dashboard", href: "/admin", icon: LayoutDashboard },
+    { name: "Kelola Surat", href: "/admin/surat", icon: Mail },
     { name: "Kelola Berita", href: "/admin/berita", icon: Newspaper },
     { name: "Perangkat Desa", href: "/admin/perangkat", icon: Users },
-    { name: "Kelola Dokumen", href: "/admin/dokumen", icon: FileText }, // MENU BARU
+    { name: "Kelola Dokumen", href: "/admin/dokumen", icon: FileText },
     { name: "Pengaturan", href: "/admin/pengaturan", icon: Settings },
   ];
 
@@ -37,7 +38,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
           {menuItems.map((item) => {
             const Icon = item.icon;
-            const isActive = pathname === item.href;
+            const isActive = pathname.startsWith(item.href) && (item.href !== "/admin" || pathname === "/admin");
             
             return (
               <Link
@@ -92,7 +93,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
               {menuItems.map((item) => {
                 const Icon = item.icon;
-                const isActive = pathname === item.href;
+                const isActive = pathname.startsWith(item.href) && (item.href !== "/admin" || pathname === "/admin");
                 return (
                   <Link
                     key={item.name}

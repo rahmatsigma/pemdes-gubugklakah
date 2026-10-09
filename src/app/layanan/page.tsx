@@ -20,7 +20,6 @@ export default async function LayananPublik() {
 
   return (
     <div className="bg-neutral-50 min-h-screen pb-20">
-      {/* Header Flat Design */}
       <section className="bg-primary-900 text-white py-16 border-b-8 border-accent-500 mb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="font-heading text-4xl font-bold mb-4">Layanan Surat Online</h1>
@@ -28,7 +27,6 @@ export default async function LayananPublik() {
             Ajukan permohonan surat pengantar dan keterangan desa dari rumah. Cepat, mudah, dan transparan.
           </p>
           
-          {/* Tombol Lacak Permohonan (Akses Cepat) */}
           <Link 
             href="/layanan/lacak"
             className="inline-flex items-center gap-2 bg-accent-500 hover:bg-accent-600 text-neutral-900 font-bold py-3 px-8 rounded-md transition-colors border-2 border-accent-600"

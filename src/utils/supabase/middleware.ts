@@ -1,5 +1,5 @@
 // Path: src/utils/supabase/middleware.ts
-// Dibuat baru
+// Logika utama untuk mengecek sesi user dan proteksi rute
 
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
@@ -18,7 +18,7 @@ export async function updateSession(request: NextRequest) {
           return request.cookies.getAll();
         },
         setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value, options }) => request.cookies.set(name, value));
+          cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value));
           supabaseResponse = NextResponse.next({
             request,
           });
@@ -30,23 +30,20 @@ export async function updateSession(request: NextRequest) {
     }
   );
 
-  // Verifikasi token/sesi
+  // Ambil data user dari sesi saat ini
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
-  // LOGIKA PROTEKSI:
-  // Jika pengunjung mencoba membuka URL yang berawalan /admin TAPI dia belum login (user tidak ada),
-  // lempar paksa dia ke halaman /login
-  if (!user && request.nextUrl.pathname.startsWith("/admin")) {
+  // ATURAN 1: Jika mencoba akses /admin tapi BELUM login, lempar ke /login
+  if (request.nextUrl.pathname.startsWith("/admin") && !user) {
     const url = request.nextUrl.clone();
     url.pathname = "/login";
     return NextResponse.redirect(url);
   }
 
-  // Jika user SUDAH login dan mencoba membuka halaman /login,
-  // lempar paksa dia ke dashboard admin (agar tidak usah login dua kali)
-  if (user && request.nextUrl.pathname === "/login") {
+  // ATURAN 2: Jika sudah login tapi mencoba buka halaman /login, kembalikan ke /admin
+  if (request.nextUrl.pathname.startsWith("/login") && user) {
     const url = request.nextUrl.clone();
     url.pathname = "/admin";
     return NextResponse.redirect(url);

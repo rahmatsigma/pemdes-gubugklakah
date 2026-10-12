@@ -3,7 +3,10 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { LayoutDashboard, Newspaper, Users, LogOut, Menu, X, Settings, FileText, Mail } from "lucide-react"; // Tambah Mail
+import { 
+  LayoutDashboard, Newspaper, Users, LogOut, Menu, X, 
+  Settings, FileText, Mail, MessageSquareWarning 
+} from "lucide-react";
 import { createClient } from "../../utils/supabase/client";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -17,9 +20,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     router.push("/login");
   };
 
+  // DAFTAR MENU ADMIN
   const menuItems = [
     { name: "Dashboard", href: "/admin", icon: LayoutDashboard },
     { name: "Kelola Surat", href: "/admin/surat", icon: Mail },
+    { name: "Pengaduan Warga", href: "/admin/pengaduan", icon: MessageSquareWarning }, 
     { name: "Kelola Berita", href: "/admin/berita", icon: Newspaper },
     { name: "Perangkat Desa", href: "/admin/perangkat", icon: Users },
     { name: "Kelola Dokumen", href: "/admin/dokumen", icon: FileText },
@@ -38,6 +43,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
           {menuItems.map((item) => {
             const Icon = item.icon;
+            // Logika aktif: pastikan url cocok persis atau url anak (kecuali /admin yg merupakan root)
             const isActive = pathname.startsWith(item.href) && (item.href !== "/admin" || pathname === "/admin");
             
             return (

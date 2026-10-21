@@ -6,7 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { 
   LayoutDashboard, Newspaper, Users, LogOut, Menu, X, 
   Settings, FileText, Mail, MessageSquareWarning, AlertTriangle,
-  IdCard 
+  IdCard, Store 
 } from "lucide-react"; 
 import { createClient } from "../../utils/supabase/client";
 
@@ -31,6 +31,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const menuItems = [
     { name: "Dashboard", href: "/admin", icon: LayoutDashboard },
     { name: "Data Penduduk", href: "/admin/penduduk", icon: IdCard },
+    { name: "Kelola UMKM", href: "/admin/umkm", icon: Store },
     { name: "Kelola Surat", href: "/admin/surat", icon: Mail },
     { name: "Pengaduan Warga", href: "/admin/pengaduan", icon: MessageSquareWarning }, 
     { name: "Kelola Berita", href: "/admin/berita", icon: Newspaper },
